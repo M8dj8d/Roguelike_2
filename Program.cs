@@ -17,8 +17,6 @@ namespace Roguelike_2
 
             Goblin[] gob = new Goblin[4];
 
-            Pidor blyat;
-
 
             gob[0] = new Goblin(10, 0.2f, 100, 0, 10f, 6f, 2, 3, 'G', 10);
             gob[1] = new Goblin(10, 0.2f, 100, 0, 10f, 10f, 2, 3, 'G', 10);
