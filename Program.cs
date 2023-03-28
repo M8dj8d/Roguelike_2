@@ -16,6 +16,8 @@ namespace Roguelike_2
             Thieve thieve = new Thieve("Игорь", 15, 0.2f, 115, 0, 80f, 10f, 2, 3, 1, 50, "Украсть", 'T');
 
             Goblin[] gob = new Goblin[4];
+
+            Poshol na huy;
             
             gob[0] = new Goblin(10, 0.2f, 100, 0, 10f, 6f, 2, 3, 'G', 10);
             gob[1] = new Goblin(10, 0.2f, 100, 0, 10f, 10f, 2, 3, 'G', 10);
