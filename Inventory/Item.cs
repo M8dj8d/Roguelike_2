@@ -8,5 +8,10 @@ namespace Roguelike_2
 {
     class Item
     {
+        public string name;
+        public Item(string name)
+        {
+            this.name = name;   
+        }
     }
 }

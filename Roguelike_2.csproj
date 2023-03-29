@@ -57,6 +57,7 @@
     <Compile Include="Interfaces\IBlackMagic.cs" />
     <Compile Include="Interfaces\IWhiteMagic.cs" />
     <Compile Include="Inventory\Item.cs" />
+    <Compile Include="Inventory\Items\LittlePoition.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
