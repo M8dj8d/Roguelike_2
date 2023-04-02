@@ -948,6 +948,34 @@ namespace Roguelike_2
                                 break;
                         }
                         break;
+                    case (2):
+                        Console.SetCursorPosition(20, 29);
+                        Console.WriteLine("Выберите союзника, на котором вы хотите применить заклинание:");
+                        Console.SetCursorPosition(20, 30);
+                        Console.WriteLine("1 " + knight.name);
+                        Console.SetCursorPosition(20, 31);
+                        Console.WriteLine("2 " + thieve.name);
+                        Console.SetCursorPosition(20, 32);
+                        Console.WriteLine("3 " + blmage.name);
+                        Console.SetCursorPosition(20, 33);
+                        Console.Write("Ваш выбор: ");
+                        b = Convert.ToInt16(Console.ReadLine());
+                        switch (b)
+                        {
+                            case (1):
+                                whmage.Recarm(whmage, knight);
+                                White_Magic_Animation(knight);
+                                break;
+                            case (2):
+                                whmage.Recarm(whmage, thieve);
+                                White_Magic_Animation(thieve);
+                                break;
+                            case (3):
+                                whmage.Recarm(whmage, blmage);
+                                White_Magic_Animation(blmage);
+                                break;
+                        }
+                        break;
                 }
             }
             if (whmage.lvl > 10)
@@ -989,6 +1017,34 @@ namespace Roguelike_2
                             case (4):
                                 whmage.Diarama(whmage, whmage);
                                 White_Magic_Animation(whmage);
+                                break;
+                        }
+                        break;
+                    case (2):
+                        Console.SetCursorPosition(20, 29);
+                        Console.WriteLine("Выберите союзника, на котором вы хотите применить заклинание:");
+                        Console.SetCursorPosition(20, 30);
+                        Console.WriteLine("1 " + knight.name);
+                        Console.SetCursorPosition(20, 31);
+                        Console.WriteLine("2 " + thieve.name);
+                        Console.SetCursorPosition(20, 32);
+                        Console.WriteLine("3 " + blmage.name);
+                        Console.SetCursorPosition(20, 33);
+                        Console.Write("Ваш выбор: ");
+                        b = Convert.ToInt16(Console.ReadLine());
+                        switch (b)
+                        {
+                            case (1):
+                                whmage.Recarm(whmage, knight);
+                                White_Magic_Animation(knight);
+                                break;
+                            case (2):
+                                whmage.Recarm(whmage, thieve);
+                                White_Magic_Animation(thieve);
+                                break;
+                            case (3):
+                                whmage.Recarm(whmage, blmage);
+                                White_Magic_Animation(blmage);
                                 break;
                         }
                         break;
