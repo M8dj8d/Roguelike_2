@@ -10,10 +10,10 @@ namespace Roguelike_2
     {
         static void Main()
         {
-            BlackMage blmage = new BlackMage("Антон", 10, 0.1f, 100, 100, 80f, 14f, 1, 3, 1, 50, "Заклинание", 'M');
-            WhiteMage whmage = new WhiteMage("Толик", 10, 0.1f, 100, 100, 80f, 18f, 1, 3, 1, 50, "Заклинание", 'W');
-            Knight knight = new Knight("Борис", 20, 0.3f, 150, 0, 79f, 6f, 3, 3, 1, 50, "Концентрация", 'K');
-            Thieve thieve = new Thieve("Игорь", 15, 0.2f, 115, 0, 80f, 10f, 2, 3, 1, 50, "Украсть", 'T');
+            BlackMage blmage = new BlackMage("Антон", 10, 0.1f, 10, 100, 80f, 14f, 1, 3, 1, 50, "Заклинание", 'M');
+            WhiteMage whmage = new WhiteMage("Толик", 10, 0.1f, 10, 100, 80f, 18f, 1, 3, 1, 50, "Заклинание", 'W');
+            Knight knight = new Knight("Борис", 20, 0.3f, 10, 0, 79f, 6f, 3, 3, 1, 50, "Концентрация", 'K');
+            Thieve thieve = new Thieve("Игорь", 15, 0.2f, 10, 0, 80f, 10f, 2, 3, 1, 50, "Украсть", 'T');
 
             Goblin[] gob = new Goblin[4];
 

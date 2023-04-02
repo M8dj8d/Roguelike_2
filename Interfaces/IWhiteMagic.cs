@@ -11,5 +11,6 @@ namespace Roguelike_2
         void Dia(WhiteMage wmage, MainCharacter ally);
         void Diarama(WhiteMage wmage, MainCharacter ally);
         void Diarahan(WhiteMage wmage, MainCharacter ally);
+        void Recarm(WhiteMage wmage, MainCharacter ally);
     }
 }

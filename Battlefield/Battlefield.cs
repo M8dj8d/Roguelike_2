@@ -11,16 +11,32 @@ namespace Roguelike_2
     {
         public static void Pole(Knight knight, Thieve thieve, BlackMage blmage, WhiteMage whmage, Enemy[] enemy)
         {
-            byte turn = 1;                              //переменная которая фиксирует чей сейчас ход
+            byte turn = 0;                              //переменная которая фиксирует чей сейчас ход
             byte coordinates;                           //хранит координаты курсора при выборе действия
             Random rnd = new Random();
             byte hit_chance;
 
             do
             {
+                turn++;
                 Console.Clear();                        //очищает консоль от лишних символов
-                
-                
+                if (turn == 1 && knight.hp <= 0)
+                    continue;
+                if (turn == 2 && thieve.hp <= 0)
+                    continue;
+                if (turn == 3 && blmage.hp <= 0)
+                    continue;
+                if (turn == 4 && whmage.hp <= 0)
+                    continue;
+                if (knight.hp > 0)
+                    knight.battlesym = 'K';
+                if (thieve.hp > 0)
+                    thieve.battlesym = 'T';
+                if (blmage.hp > 0)
+                    blmage.battlesym = 'M';
+                if (whmage.hp > 0)
+                    whmage.battlesym = 'W';
+
                 switch (turn)                            //позволяет выдвинуть вперед персонажа, который совершает ход
                 {
                     case (1):
@@ -108,111 +124,135 @@ namespace Roguelike_2
 
 
                 Interface(knight, thieve, blmage, whmage);          //отрисовывает показатели персонажей
-
-                Helping(100, 18, "1. Атака");                  //отображает действия, которые может выбрать игрок
-                Helping(100, 19, "2. Защита");
-                switch (turn)                               //это часть у каждого персонажа разная
+                if (turn <= 4)
                 {
-                    case (1): Helping(100, 20,"3. " + knight.specaction); break;
-                    case (2): Helping(100, 20,"3. " + thieve.specaction); break;
-                    case (3): Helping(100, 20,"3. " + blmage.specaction); break;
-                    case (4): Helping(100, 20,"3. " + whmage.specaction); break;
-                    default: break;
+                    
+
+                    Helping(100, 18, "1. Атака");                  //отображает действия, которые может выбрать игрок
+                    Helping(100, 19, "2. Защита");
+                    switch (turn)                               //это часть у каждого персонажа разная
+                    {
+                        case (1): Helping(100, 20, "3. " + knight.specaction); break;
+                        case (2): Helping(100, 20, "3. " + thieve.specaction); break;
+                        case (3): Helping(100, 20, "3. " + blmage.specaction); break;
+                        case (4): Helping(100, 20, "3. " + whmage.specaction); break;
+                        default: break;
+                    }
+                    Helping(100, 21, "4. Предмет");
+                    Helping(100, 22, "5. Побег");
+                    Helping(100, 23, "Выберите действие: ");
+                    coordinates = Convert.ToByte(Console.ReadLine());
+
+                    switch (coordinates)                                    //выполняет действие, которое выбрал игрок
+                    {
+                        case (1):                                          //атака персонажа
+                            switch (turn)                                    //какой именно персонаж атакует
+                            {
+                                case (1):
+                                    hit_chance = (byte)rnd.Next(1, 10);
+                                    if (hit_chance > 3)
+                                        Attak(knight, ref enemy);
+                                    break;
+                                case (2):
+                                    hit_chance = (byte)rnd.Next(1, 10);
+                                    if (hit_chance > 3)
+                                        Attak(thieve, ref enemy);
+                                    break;
+                                case (3):
+                                    hit_chance = (byte)rnd.Next(1, 10);
+                                    if (hit_chance > 3)
+                                        Attak(blmage, ref enemy);
+                                    break;
+                                case (4):
+                                    hit_chance = (byte)rnd.Next(1, 10);
+                                    if (hit_chance > 3)
+                                        Attak(whmage, ref enemy);
+                                    break;
+                            }
+                            break;
+                        case (2):                               //увеличение защиты у персонажа
+                            switch (turn)                       //какой именно персонаж
+                            {
+                                case (1):
+                                    knight.defence += 0.25f;
+                                    break;
+                                case (2):
+                                    thieve.defence += 0.25f;
+                                    break;
+                                case (3):
+                                    blmage.defence += 0.25f;
+                                    break;
+                                case (4):
+                                    whmage.defence += 0.25f;
+                                    break;
+                            }
+                            break;
+                        case (3):                                   //особое действие персонажа
+                            switch (turn)
+                            {
+                                case (1):                           //увеличение урона вдвое
+                                    knight.damage *= 2;
+                                    break;
+                                case (2):                           //воровство предмета
+                                    hit_chance = (byte)rnd.Next(1, 10);
+                                    if (hit_chance > 3)
+                                        thieve.Steal(enemy);
+                                    break;
+                                case (3):                           //черная магия
+                                    hit_chance = (byte)rnd.Next(1, 10);
+                                    if (hit_chance > 3)
+                                        BlackMagic(blmage, ref enemy);
+                                    break;
+                                case (4):                           //белая магия
+                                    WhiteMagic(knight, thieve, blmage, whmage);
+                                    break;
+                            }
+                            break;
+                        case (4):                                   //использование предмета
+                            switch (turn)
+                            {
+                                case (1):
+
+                                    break;
+                                case (2):
+
+                                    break;
+                                case (3):
+
+                                    break;
+                                case (4):
+
+                                    break;
+                            }
+                            break;
+                        case (5):                                   //попытка сбежать с поля боя
+                            switch (turn)
+                            {
+                                case (1):
+                                    hit_chance = (byte)rnd.Next(1, 10);
+                                    if (hit_chance > 9)
+                                        turn = 9;
+                                    break;
+                                case (2):
+                                    hit_chance = (byte)rnd.Next(1, 10);
+                                    if (hit_chance > 9)
+                                        turn = 9;
+                                    break;
+                                case (3):
+                                    hit_chance = (byte)rnd.Next(1, 10);
+                                    if (hit_chance > 9)
+                                        turn = 9;
+                                    break;
+                                case (4):
+                                    hit_chance = (byte)rnd.Next(1, 10);
+                                    if (hit_chance > 9)
+                                        turn = 9;
+                                    break;
+                            }
+                            break;
+
+                    }
                 }
-                Helping(100, 21, "4. Предмет");
-                Helping(100, 22, "5. Побег");
-                Helping(100, 23, "Выберите действие: ");
-                coordinates = Convert.ToByte(Console.ReadLine());            
-                switch (coordinates)                                    //выполняет действие, которое выбрал игрок
-                {
-                    case (1):                                          //атака персонажа
-                        switch(turn)                                    //какой именно персонаж атакует
-                        {
-                            case (1):
-                                Attak(knight, ref enemy);
-                                break;
-                            case (2):
-                                Attak(thieve, ref enemy);
-                                break;
-                            case (3):
-                                Attak(blmage, ref enemy);
-                                break;
-                            case (4):
-                                Attak(whmage, ref enemy);
-                                break;
-                        }
-                        break;
-                    case (2):                               //увеличение защиты у персонажа
-                        switch (turn)                       //какой именно персонаж
-                        {
-                            case (1):
-                                knight.defence += 0.25f;
-                                break;
-                            case (2):
-                                thieve.defence += 0.25f;
-                                break;
-                            case (3):
-                                blmage.defence += 0.25f;
-                                break;
-                            case (4):
-                                whmage.defence += 0.25f;
-                                break;
-                        }
-                        break;
-                    case (3):                                   //особое действие персонажа
-                        switch (turn)                    
-                        {
-                            case (1):                           //увеличение урона вдвое
-                                knight.damage *= 2;
-                                break;
-                            case (2):                           //воровство предмета
-                                thieve.Steal(enemy);
-                                break;
-                            case (3):                           //черная магия
-                                BlackMagic(blmage, ref enemy);
-                                break;
-                            case (4):                           //белая магия
-                                WhiteMagic(knight, thieve, blmage, whmage);
-                                break;
-                        }
-                        break;
-                    case (4):                                   //использование предмета
-                        switch (turn)                    
-                        {
-                            case (1):
-
-                                break;
-                            case (2):
-
-                                break;
-                            case (3):
-
-                                break;
-                            case (4):
-
-                                break;
-                        }
-                        break;
-                    case (5):                                   //попытка сбежать с поля боя
-                        switch (turn)                    
-                        {
-                            case (1):
-
-                                break;
-                            case (2):
-
-                                break;
-                            case (3):
-
-                                break;
-                            case (4):
-
-                                break;
-                        }
-                        break;
-
-                }
-
 
                 switch (turn)                                    //атака противников
                 {
@@ -220,25 +260,29 @@ namespace Roguelike_2
                         if (enemy[0].hp > 0)
                         {
                             hit_chance = (byte)rnd.Next(0, 20);
-                            if (hit_chance >= 0 && hit_chance <= 4)
+                            if (hit_chance >= 0 && hit_chance <= 4 && knight.hp > 0)
                             {
+                                Enemy_Attak_Animation(enemy[0]);
                                 knight.hp -= (int)Math.Round((float)enemy[0].damage * (1f - knight.defence));
-                                Helping(10, 25, knight.name + " получает " + Math.Round((float)enemy[0].damage * (1f - knight.defence)) + "урона");
+                                Helping(10, 25, knight.name + " получает " + Math.Round((float)enemy[0].damage * (1f - knight.defence)) + " урона");
                             }
-                            if (hit_chance >= 6 && hit_chance <= 10)
+                            if (hit_chance >= 6 && hit_chance <= 10 && thieve.hp > 0)
                             {
+                                Enemy_Attak_Animation(enemy[0]);
                                 thieve.hp -= (int)Math.Round((float)enemy[0].damage * (1f - thieve.defence));
-                                Helping(10, 25, thieve.name + " получает " + Math.Round((float)enemy[0].damage * (1f - thieve.defence)) + "урона");
+                                Helping(10, 25, thieve.name + " получает " + Math.Round((float)enemy[0].damage * (1f - thieve.defence)) + " урона");
                             }
-                            if (hit_chance >= 12 && hit_chance <= 15)
+                            if (hit_chance >= 12 && hit_chance <= 15 && blmage.hp > 0)
                             {
+                                Enemy_Attak_Animation(enemy[0]);
                                 blmage.hp -= (int)Math.Round((float)enemy[0].damage * (1f - blmage.defence));
-                                Helping(10, 25, blmage.name + " получает " + Math.Round((float)enemy[0].damage * (1f - blmage.defence)) + "урона");
+                                Helping(10, 25, blmage.name + " получает " + Math.Round((float)enemy[0].damage * (1f - blmage.defence)) + " урона");
                             }
-                            if (hit_chance >= 17 && hit_chance <= 20)
+                            if (hit_chance >= 17 && hit_chance <= 20 && whmage.hp > 0)
                             {
+                                Enemy_Attak_Animation(enemy[0]);
                                 whmage.hp -= (int)Math.Round((float)enemy[0].damage * (1f - whmage.defence));
-                                Helping(10, 25, whmage.name + " получает " + Math.Round((float)enemy[0].damage * (1f - whmage.defence)) + "урона");
+                                Helping(10, 25, whmage.name + " получает " + Math.Round((float)enemy[0].damage * (1f - whmage.defence)) + " урона");
                             }
                         }
                         break;
@@ -246,25 +290,29 @@ namespace Roguelike_2
                         if (enemy[1].hp > 0)
                         {
                             hit_chance = (byte)rnd.Next(0, 20);
-                            if (hit_chance >= 0 && hit_chance <= 4)
+                            if (hit_chance >= 0 && hit_chance <= 4 && knight.hp > 0)
                             {
+                                Enemy_Attak_Animation(enemy[1]);
                                 knight.hp -= (int)Math.Round((float)enemy[1].damage * (1f - knight.defence));
-                                Helping(10, 25, knight.name + " получает " + Math.Round((float)enemy[1].damage * (1f - knight.defence)) + "урона");
+                                Helping(10, 25, knight.name + " получает " + Math.Round((float)enemy[1].damage * (1f - knight.defence)) + " урона");
                             }
-                            if (hit_chance >= 6 && hit_chance <= 10)
+                            if (hit_chance >= 6 && hit_chance <= 10 && thieve.hp > 0)
                             {
+                                Enemy_Attak_Animation(enemy[1]);
                                 thieve.hp -= (int)Math.Round((float)enemy[1].damage * (1f - thieve.defence));
-                                Helping(10, 25, thieve.name + " получает " + Math.Round((float)enemy[1].damage * (1f - thieve.defence)) + "урона");
+                                Helping(10, 25, thieve.name + " получает " + Math.Round((float)enemy[1].damage * (1f - thieve.defence)) + " урона");
                             }
-                            if (hit_chance >= 12 && hit_chance <= 15)
+                            if (hit_chance >= 12 && hit_chance <= 15 && blmage.hp > 0)
                             {
+                                Enemy_Attak_Animation(enemy[1]);
                                 blmage.hp -= (int)Math.Round((float)enemy[1].damage * (1f - blmage.defence));
-                                Helping(10, 25, blmage.name + " получает " + Math.Round((float)enemy[1].damage * (1f - blmage.defence)) + "урона");
+                                Helping(10, 25, blmage.name + " получает " + Math.Round((float)enemy[1].damage * (1f - blmage.defence)) + " урона");
                             }
-                            if (hit_chance >= 17 && hit_chance <= 20)
+                            if (hit_chance >= 17 && hit_chance <= 20 && whmage.hp > 0)
                             {
+                                Enemy_Attak_Animation(enemy[1]);
                                 whmage.hp -= (int)Math.Round((float)enemy[1].damage * (1f - whmage.defence));
-                                Helping(10, 25, whmage.name + " получает " + Math.Round((float)enemy[1].damage * (1f - whmage.defence)) + "урона");
+                                Helping(10, 25, whmage.name + " получает " + Math.Round((float)enemy[1].damage * (1f - whmage.defence)) + " урона");
                             }
                         }
                         break;
@@ -272,25 +320,29 @@ namespace Roguelike_2
                         if (enemy[2].hp > 0)
                         {
                             hit_chance = (byte)rnd.Next(0, 20);
-                            if (hit_chance >= 0 && hit_chance <= 4)
+                            if (hit_chance >= 0 && hit_chance <= 4 && knight.hp > 0)
                             {
+                                Enemy_Attak_Animation(enemy[2]);
                                 knight.hp -= (int)Math.Round((float)enemy[2].damage * (1f - knight.defence));
-                                Helping(10, 25, knight.name + " получает " + Math.Round((float)enemy[2].damage * (1f - knight.defence)) + "урона");
+                                Helping(10, 25, knight.name + " получает " + Math.Round((float)enemy[2].damage * (1f - knight.defence)) + " урона");
                             }
-                            if (hit_chance >= 6 && hit_chance <= 10)
+                            if (hit_chance >= 6 && hit_chance <= 10 && thieve.hp > 0)
                             {
+                                Enemy_Attak_Animation(enemy[2]);
                                 thieve.hp -= (int)Math.Round((float)enemy[2].damage * (1f - thieve.defence));
-                                Helping(10, 25, thieve.name + " получает " + Math.Round((float)enemy[2].damage * (1f - thieve.defence)) + "урона");
+                                Helping(10, 25, thieve.name + " получает " + Math.Round((float)enemy[2].damage * (1f - thieve.defence)) + " урона");
                             }
-                            if (hit_chance >= 12 && hit_chance <= 15)
+                            if (hit_chance >= 12 && hit_chance <= 15 && blmage.hp > 0)
                             {
+                                Enemy_Attak_Animation(enemy[2]);
                                 blmage.hp -= (int)Math.Round((float)enemy[2].damage * (1f - blmage.defence));
-                                Helping(10, 25, blmage.name + " получает " + Math.Round((float)enemy[2].damage * (1f - blmage.defence)) + "урона");
+                                Helping(10, 25, blmage.name + " получает " + Math.Round((float)enemy[2].damage * (1f - blmage.defence)) + " урона");
                             }
-                            if (hit_chance >= 17 && hit_chance <= 20)
+                            if (hit_chance >= 17 && hit_chance <= 20 && whmage.hp > 0)
                             {
+                                Enemy_Attak_Animation(enemy[2]);
                                 whmage.hp -= (int)Math.Round((float)enemy[2].damage * (1f - whmage.defence));
-                                Helping(10, 25, whmage.name + " получает " + Math.Round((float)enemy[2].damage * (1f - whmage.defence)) + "урона");
+                                Helping(10, 25, whmage.name + " получает " + Math.Round((float)enemy[2].damage * (1f - whmage.defence)) + " урона");
                             }
                         }
                         break;
@@ -298,25 +350,29 @@ namespace Roguelike_2
                         if (enemy[3].hp > 0)
                         {
                             hit_chance = (byte)rnd.Next(0, 20);
-                            if (hit_chance >= 0 && hit_chance <= 4)
+                            if (hit_chance >= 0 && hit_chance <= 4 && knight.hp > 0)
                             {
+                                Enemy_Attak_Animation(enemy[3]);
                                 knight.hp -= (int)Math.Round((float)enemy[3].damage * (1f - knight.defence));
-                                Helping(10, 25, knight.name + " получает " + Math.Round((float)enemy[3].damage * (1f - knight.defence)) + "урона");
+                                Helping(10, 25, knight.name + " получает " + Math.Round((float)enemy[3].damage * (1f - knight.defence)) + " урона");
                             }
-                            if (hit_chance >= 6 && hit_chance <= 10)
+                            if (hit_chance >= 6 && hit_chance <= 10 && thieve.hp > 0)
                             {
+                                Enemy_Attak_Animation(enemy[3]);
                                 thieve.hp -= (int)Math.Round((float)enemy[3].damage * (1f - thieve.defence));
-                                Helping(10, 25, thieve.name + " получает " + Math.Round((float)enemy[3].damage * (1f - thieve.defence)) + "урона");
+                                Helping(10, 25, thieve.name + " получает " + Math.Round((float)enemy[3].damage * (1f - thieve.defence)) + " урона");
                             }
-                            if (hit_chance >= 12 && hit_chance <= 15)
+                            if (hit_chance >= 12 && hit_chance <= 15 && blmage.hp > 0)
                             {
+                                Enemy_Attak_Animation(enemy[3]);
                                 blmage.hp -= (int)Math.Round((float)enemy[3].damage * (1f - blmage.defence));
-                                Helping(10, 25, blmage.name + " получает " + Math.Round((float)enemy[3].damage * (1f - blmage.defence)) + "урона");
+                                Helping(10, 25, blmage.name + " получает " + Math.Round((float)enemy[3].damage * (1f - blmage.defence)) + " урона");
                             }
-                            if (hit_chance >= 17 && hit_chance <= 20)
+                            if (hit_chance >= 17 && hit_chance <= 20 && whmage.hp > 0)
                             {
+                                Enemy_Attak_Animation(enemy[3]);
                                 whmage.hp -= (int)Math.Round((float)enemy[3].damage * (1f - whmage.defence));
-                                Helping(10, 25, whmage.name + " получает " + Math.Round((float)enemy[3].damage * (1f - whmage.defence)) + "урона");
+                                Helping(10, 25, whmage.name + " получает " + Math.Round((float)enemy[3].damage * (1f - whmage.defence)) + " урона");
                             }
                         }
                         break;
@@ -335,14 +391,28 @@ namespace Roguelike_2
                     }
                 }
                 if (knight.hp <= 0)
+                {
                     knight.battlesym = '+';
+                    knight.hp = 0;
+                }
                 if (thieve.hp <= 0)
+                {
                     thieve.battlesym = '+';
+                    thieve.hp = 0;
+                }
                 if (blmage.hp <= 0)
+                {
                     blmage.battlesym = '+';
+                    blmage.hp = 0;
+                }
                 if (whmage.hp <= 0)
+                {
                     whmage.battlesym = '+';
-                turn++;
+                    whmage.hp = 0;
+                }
+                if (knight.hp <= 0 && thieve.hp <= 0 && blmage.hp <= 0 && whmage.hp <= 0)
+                    turn = 9;
+                
             } while (turn != 9);
 
         }
@@ -401,16 +471,16 @@ namespace Roguelike_2
             switch (which_enemy)
             {
                 case (1):
-                    enemy[0].hp -= hero.damage;
+                    enemy[0].hp -= (int)(Math.Round(hero.damage * (1f - enemy[0].defence)));
                     break;
                 case (2):
-                    enemy[1].hp -= hero.damage;
+                    enemy[1].hp -= (int)(Math.Round(hero.damage * (1f - enemy[1].defence)));
                     break;
                 case (3):
-                    enemy[2].hp -= hero.damage;
+                    enemy[2].hp -= (int)(Math.Round(hero.damage * (1f - enemy[2].defence)));
                     break;
                 case (4):
-                    enemy[3].hp -= hero.damage;
+                    enemy[3].hp -= (int)(Math.Round(hero.damage * (1f - enemy[3].defence)));
                     break;
             }
             Console.SetCursorPosition(Convert.ToInt32(hero.x) - 6, Convert.ToInt32(hero.y + 1));
@@ -766,23 +836,24 @@ namespace Roguelike_2
             if(whmage.lvl <= 5)
             {
                 Helping(10, 26, "1 Dia");
-                Console.SetCursorPosition(10, 27);
+                Helping(10, 26, "2 Recarm");
+                Console.SetCursorPosition(10, 28);
                 Console.Write("Введите номер заклинания. Ваш выбор: ");
                 a = Convert.ToInt16(Console.ReadLine());
                 switch (a)
                 {
                     case (1):
-                        Console.SetCursorPosition(20, 27);
-                        Console.WriteLine("Выберите союзника, на котором вы хотите применить заклинание:");
-                        Console.SetCursorPosition(20, 28);
-                        Console.WriteLine("1 " + knight.name);
                         Console.SetCursorPosition(20, 29);
-                        Console.WriteLine("2 " + thieve.name);
+                        Console.WriteLine("Выберите союзника, на котором вы хотите применить заклинание:");
                         Console.SetCursorPosition(20, 30);
-                        Console.WriteLine("3 " + blmage.name);
+                        Console.WriteLine("1 " + knight.name);
                         Console.SetCursorPosition(20, 31);
-                        Console.WriteLine("4 " + whmage.name);
+                        Console.WriteLine("2 " + thieve.name);
                         Console.SetCursorPosition(20, 32);
+                        Console.WriteLine("3 " + blmage.name);
+                        Console.SetCursorPosition(20, 33);
+                        Console.WriteLine("4 " + whmage.name);
+                        Console.SetCursorPosition(20, 34);
                         Console.Write("Ваш выбор: ");
                         b = Convert.ToInt16(Console.ReadLine());
                         switch (b)
@@ -802,6 +873,34 @@ namespace Roguelike_2
                             case (4):
                                 whmage.Dia(whmage, whmage);
                                 White_Magic_Animation(whmage);
+                                break;
+                        }
+                        break;
+                    case (2):
+                        Console.SetCursorPosition(20, 29);
+                        Console.WriteLine("Выберите союзника, на котором вы хотите применить заклинание:");
+                        Console.SetCursorPosition(20, 30);
+                        Console.WriteLine("1 " + knight.name);
+                        Console.SetCursorPosition(20, 31);
+                        Console.WriteLine("2 " + thieve.name);
+                        Console.SetCursorPosition(20, 32);
+                        Console.WriteLine("3 " + blmage.name);
+                        Console.SetCursorPosition(20, 33);
+                        Console.Write("Ваш выбор: ");
+                        b = Convert.ToInt16(Console.ReadLine());
+                        switch (b)
+                        {
+                            case (1):
+                                whmage.Recarm(whmage, knight);
+                                White_Magic_Animation(knight);
+                                break;
+                            case (2):
+                                whmage.Recarm(whmage, thieve);
+                                White_Magic_Animation(thieve);
+                                break;
+                            case (3):
+                                whmage.Recarm(whmage, blmage);
+                                White_Magic_Animation(blmage);
                                 break;
                         }
                         break;
@@ -924,6 +1023,21 @@ namespace Roguelike_2
             Console.WriteLine("name: {0}\tHP: {1}\tSP: {2}\tDamage: {3}\tDefence: {4}\tGold: {5}", blmage.name, blmage.hp, blmage.sp, blmage.damage, blmage.defence, blmage.gold);
             Console.SetCursorPosition(90, 7);
             Console.WriteLine("name: {0}\tHP: {1}\tSP: {2}\tDamage: {3}\tDefence: {4}\tGold: {5}", whmage.name, whmage.hp, whmage.sp, whmage.damage, whmage.defence, whmage.gold);
+        }
+    
+    
+    
+        private static void Enemy_Attak_Animation(Enemy enemy)
+        {
+            Console.SetCursorPosition(Convert.ToInt32(enemy.x) + 7, Convert.ToInt32(enemy.y + 1));
+            Thread.Sleep(250);
+            Console.Write("-");
+            Console.SetCursorPosition(Convert.ToInt32(enemy.x) + 8, Convert.ToInt32(enemy.y + 1));
+            Thread.Sleep(250);
+            Console.Write("-");
+            Console.SetCursorPosition(Convert.ToInt32(enemy.x) + 9, Convert.ToInt32(enemy.y + 1));
+            Thread.Sleep(250);
+            Console.Write("-");
         }
     }
 }

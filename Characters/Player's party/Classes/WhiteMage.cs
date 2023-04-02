@@ -12,7 +12,7 @@ namespace Roguelike_2
 
         public void Dia(WhiteMage wmage, MainCharacter ally)
         {
-            if (wmage.sp >= 8)
+            if (wmage.sp >= 8 && ally.hp != 0)
             {
                 if (ally.realhp - ally.hp > 50)
                 {
@@ -28,13 +28,13 @@ namespace Roguelike_2
             else
             {
                 Console.SetCursorPosition(20, 33);
-                Console.WriteLine("У вас недостаточно маны!");
+                Console.WriteLine("У вас не получается восстановить здоровье");
             }
         }
 
         public void Diarahan(WhiteMage wmage, MainCharacter ally)
         {
-            if (wmage.sp >= 12)
+            if (wmage.sp >= 12 && ally.hp != 0)
             {
                 if (ally.realhp - ally.hp > 70)
                 {
@@ -50,13 +50,13 @@ namespace Roguelike_2
             else
             {
                 Console.SetCursorPosition(20, 33);
-                Console.WriteLine("У вас недостаточно маны!");
+                Console.WriteLine("У вас не получается восстановить здоровье");
             }
         }
 
         public void Diarama(WhiteMage wmage, MainCharacter ally)
         {
-            if (wmage.sp >= 20)
+            if (wmage.sp >= 20 && ally.hp != 0)
             {
                 if (ally.realhp - ally.hp > 100)
                 {
@@ -72,7 +72,21 @@ namespace Roguelike_2
             else
             {
                 Console.SetCursorPosition(20, 33);
-                Console.WriteLine("У вас недостаточно маны!");
+                Console.WriteLine("У вас не получается восстановить здоровье");
+            }
+        }
+
+        public void Recarm(WhiteMage wmage, MainCharacter ally)
+        {
+            if (wmage.sp >= 20 && ally.hp == 0)
+            {
+                ally.hp += 20;
+                wmage.sp -= 20;
+            }
+            else
+            {
+                Console.SetCursorPosition(20, 33);
+                Console.WriteLine("У вас не получается восстановить здоровье");
             }
         }
     }
