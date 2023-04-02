@@ -10,7 +10,7 @@ namespace Roguelike_2
     {
         public Thieve (string name, int damage, float defence, int hp, int sp, float x, float y, int ix, int iy, int lvl, int gold, string specaction, char sym) : base(name, damage, defence, hp, sp, x, y, ix, iy, lvl, gold, specaction, sym) { }
 
-        public void Steal()
+        public void Steal(Enemy[] enemy)
         {
 
         }

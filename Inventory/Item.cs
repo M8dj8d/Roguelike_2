@@ -9,9 +9,11 @@ namespace Roguelike_2
     class Item
     {
         public string name;
-        public Item(string name)
+        public int amount;
+        public Item(string name, int amount)
         {
-            this.name = name;   
+            this.name = name;
+            this.amount = amount;
         }
     }
 }

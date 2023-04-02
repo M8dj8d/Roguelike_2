@@ -8,14 +8,22 @@ namespace Roguelike_2
 {
     class WhiteMage : MainCharacter, IWhiteMagic
     {
-        public WhiteMage (string name, int damage, float defence, int hp, int sp, float x, float y, int ix, int iy, int lvl, int gold, string specaction, char sym) : base(name, damage, defence, hp, sp, x, y, ix, iy, lvl, gold, specaction, sym) { }
+        public WhiteMage(string name, int damage, float defence, int hp, int sp, float x, float y, int ix, int iy, int lvl, int gold, string specaction, char sym) : base(name, damage, defence, hp, sp, x, y, ix, iy, lvl, gold, specaction, sym) { }
 
         public void Dia(WhiteMage wmage, MainCharacter ally)
         {
             if (wmage.sp >= 8)
             {
-                ally.hp += 50;
-                wmage.sp -= 8; 
+                if (ally.realhp - ally.hp > 50)
+                {
+                    ally.hp += 50;
+                    wmage.sp -= 8;  
+                }
+                else
+                {
+                    ally.hp = ally.realhp;
+                    wmage.sp -= 8;
+                }
             }
             else
             {
@@ -28,8 +36,16 @@ namespace Roguelike_2
         {
             if (wmage.sp >= 12)
             {
-                ally.hp += 70;
-                wmage.sp -= 12; 
+                if (ally.realhp - ally.hp > 70)
+                {
+                    ally.hp += 70;
+                    wmage.sp -= 12;
+                }
+                else
+                {
+                    ally.hp = ally.realhp;
+                    wmage.sp -= 12;
+                }
             }
             else
             {
@@ -42,8 +58,16 @@ namespace Roguelike_2
         {
             if (wmage.sp >= 20)
             {
-                ally.hp += 100;
-                wmage.sp -= 20; 
+                if (ally.realhp - ally.hp > 100)
+                {
+                    ally.hp += 100;
+                    wmage.sp -= 20;
+                }
+                else
+                {
+                    ally.hp = ally.realhp;
+                    wmage.sp -= 20;
+                }
             }
             else
             {

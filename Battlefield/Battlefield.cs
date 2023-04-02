@@ -13,15 +13,13 @@ namespace Roguelike_2
         {
             byte turn = 1;                              //переменная которая фиксирует чей сейчас ход
             byte coordinates;                           //хранит координаты курсора при выборе действия
-
+            Random rnd = new Random();
+            byte hit_chance;
 
             do
             {
                 Console.Clear();                        //очищает консоль от лишних символов
-                for (int i = 0; i < 4; i++)             //генерирует врагов на арене
-                {
-                    Person(enemy[i].x, enemy[i].y, enemy[i].ix, enemy[i].iy, enemy[i].battlesym); 
-                }
+                
                 
                 switch (turn)                            //позволяет выдвинуть вперед персонажа, который совершает ход
                 {
@@ -30,26 +28,82 @@ namespace Roguelike_2
                         Person(thieve.x, thieve.y, thieve.ix, thieve.iy, thieve.battlesym);
                         Person(blmage.x, blmage.y, blmage.ix, blmage.iy, blmage.battlesym);
                         Person(whmage.x, whmage.y, whmage.ix, whmage.iy, whmage.battlesym);
+                        for (int i = 0; i < 4; i++)             
+                        {
+                            Person(enemy[i].x, enemy[i].y, enemy[i].ix, enemy[i].iy, enemy[i].battlesym);
+                        }
                         break;
                     case (2):
                         Person(knight.x, knight.y, knight.ix, knight.iy, knight.battlesym);
                         Person(thieve.x -5, thieve.y, thieve.ix, thieve.iy, thieve.battlesym);                  //отображение второго персонажа
                         Person(blmage.x, blmage.y, blmage.ix, blmage.iy, blmage.battlesym);
                         Person(whmage.x, whmage.y, whmage.ix, whmage.iy, whmage.battlesym);
+                        for (int i = 0; i < 4; i++)             
+                        {
+                            Person(enemy[i].x, enemy[i].y, enemy[i].ix, enemy[i].iy, enemy[i].battlesym);
+                        }
                         break;
                     case (3):
                         Person(knight.x, knight.y, knight.ix, knight.iy, knight.battlesym);
                         Person(thieve.x, thieve.y, thieve.ix, thieve.iy, thieve.battlesym);
                         Person(blmage.x - 5, blmage.y, blmage.ix, blmage.iy, blmage.battlesym);                  //отображение третьего персонажа
                         Person(whmage.x, whmage.y, whmage.ix, whmage.iy, whmage.battlesym);
+                        for (int i = 0; i < 4; i++)            
+                        {
+                            Person(enemy[i].x, enemy[i].y, enemy[i].ix, enemy[i].iy, enemy[i].battlesym);
+                        }
                         break;
                     case (4):
                         Person(knight.x, knight.y, knight.ix, knight.iy, knight.battlesym);
                         Person(thieve.x, thieve.y, thieve.ix, thieve.iy, thieve.battlesym);
                         Person(blmage.x, blmage.y, blmage.ix, blmage.iy, blmage.battlesym);
                         Person(whmage.x - 5, whmage.y, whmage.ix, whmage.iy, whmage.battlesym);                  //отображение четрвертого персонажа
+                        for (int i = 0; i < 4; i++)             
+                        {
+                            Person(enemy[i].x, enemy[i].y, enemy[i].ix, enemy[i].iy, enemy[i].battlesym);
+                        }
                         break;
-                    default: break;
+                    case (5):
+                        Person(knight.x, knight.y, knight.ix, knight.iy, knight.battlesym);                  
+                        Person(thieve.x, thieve.y, thieve.ix, thieve.iy, thieve.battlesym);
+                        Person(blmage.x, blmage.y, blmage.ix, blmage.iy, blmage.battlesym);
+                        Person(whmage.x, whmage.y, whmage.ix, whmage.iy, whmage.battlesym);
+                        Person(enemy[0].x + 5, enemy[0].y, enemy[0].ix, enemy[0].iy, enemy[0].battlesym);
+                        Person(enemy[1].x, enemy[1].y, enemy[1].ix, enemy[1].iy, enemy[1].battlesym);
+                        Person(enemy[2].x, enemy[2].y, enemy[2].ix, enemy[2].iy, enemy[2].battlesym);
+                        Person(enemy[3].x, enemy[3].y, enemy[3].ix, enemy[3].iy, enemy[3].battlesym);
+                        break;
+                    case (6):
+                        Person(knight.x, knight.y, knight.ix, knight.iy, knight.battlesym);
+                        Person(thieve.x, thieve.y, thieve.ix, thieve.iy, thieve.battlesym);
+                        Person(blmage.x, blmage.y, blmage.ix, blmage.iy, blmage.battlesym);
+                        Person(whmage.x, whmage.y, whmage.ix, whmage.iy, whmage.battlesym);
+                        Person(enemy[0].x, enemy[0].y, enemy[0].ix, enemy[0].iy, enemy[0].battlesym);
+                        Person(enemy[1].x + 5, enemy[1].y, enemy[1].ix, enemy[1].iy, enemy[1].battlesym);
+                        Person(enemy[2].x, enemy[2].y, enemy[2].ix, enemy[2].iy, enemy[2].battlesym);
+                        Person(enemy[3].x, enemy[3].y, enemy[3].ix, enemy[3].iy, enemy[3].battlesym);
+                        break;
+                    case (7):
+                        Person(knight.x, knight.y, knight.ix, knight.iy, knight.battlesym);
+                        Person(thieve.x, thieve.y, thieve.ix, thieve.iy, thieve.battlesym);
+                        Person(blmage.x, blmage.y, blmage.ix, blmage.iy, blmage.battlesym);
+                        Person(whmage.x, whmage.y, whmage.ix, whmage.iy, whmage.battlesym);
+                        Person(enemy[0].x, enemy[0].y, enemy[0].ix, enemy[0].iy, enemy[0].battlesym);
+                        Person(enemy[1].x, enemy[1].y, enemy[1].ix, enemy[1].iy, enemy[1].battlesym);
+                        Person(enemy[2].x + 5, enemy[2].y, enemy[2].ix, enemy[2].iy, enemy[2].battlesym);
+                        Person(enemy[3].x, enemy[3].y, enemy[3].ix, enemy[3].iy, enemy[3].battlesym);
+                        break; 
+                    case (8):
+                        Person(knight.x, knight.y, knight.ix, knight.iy, knight.battlesym);
+                        Person(thieve.x, thieve.y, thieve.ix, thieve.iy, thieve.battlesym);
+                        Person(blmage.x, blmage.y, blmage.ix, blmage.iy, blmage.battlesym);
+                        Person(whmage.x, whmage.y, whmage.ix, whmage.iy, whmage.battlesym);
+                        Person(enemy[0].x, enemy[0].y, enemy[0].ix, enemy[0].iy, enemy[0].battlesym);
+                        Person(enemy[1].x, enemy[1].y, enemy[1].ix, enemy[1].iy, enemy[1].battlesym);
+                        Person(enemy[2].x, enemy[2].y, enemy[2].ix, enemy[2].iy, enemy[2].battlesym);
+                        Person(enemy[3].x + 5, enemy[3].y, enemy[3].ix, enemy[3].iy, enemy[3].battlesym);
+                        break;
+                    
                 }
 
 
@@ -112,7 +166,7 @@ namespace Roguelike_2
                                 knight.damage *= 2;
                                 break;
                             case (2):                           //воровство предмета
-
+                                thieve.Steal(enemy);
                                 break;
                             case (3):                           //черная магия
                                 BlackMagic(blmage, ref enemy);
@@ -158,19 +212,138 @@ namespace Roguelike_2
                         break;
 
                 }
+
+
+                switch (turn)                                    //атака противников
+                {
+                    case (5):
+                        if (enemy[0].hp > 0)
+                        {
+                            hit_chance = (byte)rnd.Next(0, 20);
+                            if (hit_chance >= 0 && hit_chance <= 4)
+                            {
+                                knight.hp -= (int)Math.Round((float)enemy[0].damage * (1f - knight.defence));
+                                Helping(10, 25, knight.name + " получает " + Math.Round((float)enemy[0].damage * (1f - knight.defence)) + "урона");
+                            }
+                            if (hit_chance >= 6 && hit_chance <= 10)
+                            {
+                                thieve.hp -= (int)Math.Round((float)enemy[0].damage * (1f - thieve.defence));
+                                Helping(10, 25, thieve.name + " получает " + Math.Round((float)enemy[0].damage * (1f - thieve.defence)) + "урона");
+                            }
+                            if (hit_chance >= 12 && hit_chance <= 15)
+                            {
+                                blmage.hp -= (int)Math.Round((float)enemy[0].damage * (1f - blmage.defence));
+                                Helping(10, 25, blmage.name + " получает " + Math.Round((float)enemy[0].damage * (1f - blmage.defence)) + "урона");
+                            }
+                            if (hit_chance >= 17 && hit_chance <= 20)
+                            {
+                                whmage.hp -= (int)Math.Round((float)enemy[0].damage * (1f - whmage.defence));
+                                Helping(10, 25, whmage.name + " получает " + Math.Round((float)enemy[0].damage * (1f - whmage.defence)) + "урона");
+                            }
+                        }
+                        break;
+                    case (6):
+                        if (enemy[1].hp > 0)
+                        {
+                            hit_chance = (byte)rnd.Next(0, 20);
+                            if (hit_chance >= 0 && hit_chance <= 4)
+                            {
+                                knight.hp -= (int)Math.Round((float)enemy[1].damage * (1f - knight.defence));
+                                Helping(10, 25, knight.name + " получает " + Math.Round((float)enemy[1].damage * (1f - knight.defence)) + "урона");
+                            }
+                            if (hit_chance >= 6 && hit_chance <= 10)
+                            {
+                                thieve.hp -= (int)Math.Round((float)enemy[1].damage * (1f - thieve.defence));
+                                Helping(10, 25, thieve.name + " получает " + Math.Round((float)enemy[1].damage * (1f - thieve.defence)) + "урона");
+                            }
+                            if (hit_chance >= 12 && hit_chance <= 15)
+                            {
+                                blmage.hp -= (int)Math.Round((float)enemy[1].damage * (1f - blmage.defence));
+                                Helping(10, 25, blmage.name + " получает " + Math.Round((float)enemy[1].damage * (1f - blmage.defence)) + "урона");
+                            }
+                            if (hit_chance >= 17 && hit_chance <= 20)
+                            {
+                                whmage.hp -= (int)Math.Round((float)enemy[1].damage * (1f - whmage.defence));
+                                Helping(10, 25, whmage.name + " получает " + Math.Round((float)enemy[1].damage * (1f - whmage.defence)) + "урона");
+                            }
+                        }
+                        break;
+                    case (7):
+                        if (enemy[2].hp > 0)
+                        {
+                            hit_chance = (byte)rnd.Next(0, 20);
+                            if (hit_chance >= 0 && hit_chance <= 4)
+                            {
+                                knight.hp -= (int)Math.Round((float)enemy[2].damage * (1f - knight.defence));
+                                Helping(10, 25, knight.name + " получает " + Math.Round((float)enemy[2].damage * (1f - knight.defence)) + "урона");
+                            }
+                            if (hit_chance >= 6 && hit_chance <= 10)
+                            {
+                                thieve.hp -= (int)Math.Round((float)enemy[2].damage * (1f - thieve.defence));
+                                Helping(10, 25, thieve.name + " получает " + Math.Round((float)enemy[2].damage * (1f - thieve.defence)) + "урона");
+                            }
+                            if (hit_chance >= 12 && hit_chance <= 15)
+                            {
+                                blmage.hp -= (int)Math.Round((float)enemy[2].damage * (1f - blmage.defence));
+                                Helping(10, 25, blmage.name + " получает " + Math.Round((float)enemy[2].damage * (1f - blmage.defence)) + "урона");
+                            }
+                            if (hit_chance >= 17 && hit_chance <= 20)
+                            {
+                                whmage.hp -= (int)Math.Round((float)enemy[2].damage * (1f - whmage.defence));
+                                Helping(10, 25, whmage.name + " получает " + Math.Round((float)enemy[2].damage * (1f - whmage.defence)) + "урона");
+                            }
+                        }
+                        break;
+                    case (8):
+                        if (enemy[3].hp > 0)
+                        {
+                            hit_chance = (byte)rnd.Next(0, 20);
+                            if (hit_chance >= 0 && hit_chance <= 4)
+                            {
+                                knight.hp -= (int)Math.Round((float)enemy[3].damage * (1f - knight.defence));
+                                Helping(10, 25, knight.name + " получает " + Math.Round((float)enemy[3].damage * (1f - knight.defence)) + "урона");
+                            }
+                            if (hit_chance >= 6 && hit_chance <= 10)
+                            {
+                                thieve.hp -= (int)Math.Round((float)enemy[3].damage * (1f - thieve.defence));
+                                Helping(10, 25, thieve.name + " получает " + Math.Round((float)enemy[3].damage * (1f - thieve.defence)) + "урона");
+                            }
+                            if (hit_chance >= 12 && hit_chance <= 15)
+                            {
+                                blmage.hp -= (int)Math.Round((float)enemy[3].damage * (1f - blmage.defence));
+                                Helping(10, 25, blmage.name + " получает " + Math.Round((float)enemy[3].damage * (1f - blmage.defence)) + "урона");
+                            }
+                            if (hit_chance >= 17 && hit_chance <= 20)
+                            {
+                                whmage.hp -= (int)Math.Round((float)enemy[3].damage * (1f - whmage.defence));
+                                Helping(10, 25, whmage.name + " получает " + Math.Round((float)enemy[3].damage * (1f - whmage.defence)) + "урона");
+                            }
+                        }
+                        break;
+                }
+
+
                 for (int i = 0; i < 4; i++)                 //отображает мертывых противников
                 {
                     if (enemy[i].hp <= 0)
                     {
                         enemy[i].battlesym = '+';
                     }
-                    else if (turn == 4)                     //обновляет ходы персонажей
+                    else if (turn == 8)                     //обновляет ходы персонажей
                     {
                         turn = 0;
                     }
                 }
+                if (knight.hp <= 0)
+                    knight.battlesym = '+';
+                if (thieve.hp <= 0)
+                    thieve.battlesym = '+';
+                if (blmage.hp <= 0)
+                    blmage.battlesym = '+';
+                if (whmage.hp <= 0)
+                    whmage.battlesym = '+';
                 turn++;
-            } while (turn != 5);
+            } while (turn != 9);
 
         }
 

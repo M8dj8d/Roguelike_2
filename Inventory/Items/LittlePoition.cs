@@ -8,7 +8,7 @@ namespace Roguelike_2
 {
     class LittlePoition : Item
     {
-        public LittlePoition(string name) : base(name) { }
+        public LittlePoition(string name, int amount) : base(name, amount) { }
 
         public void Heal(List<Item> poitions, MainCharacter hero)
         {

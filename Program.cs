@@ -23,6 +23,8 @@ namespace Roguelike_2
             gob[2] = new Goblin(10, 0.2f, 100, 0, 10f, 14f, 2, 3, 'G', 10);
             gob[3] = new Goblin(10, 0.2f, 100, 0, 10f, 18f, 2, 3, 'G', 10);
 
+            List<Item> items = new List<Item>();        
+
             Battlefield.Pole(knight, thieve, blmage, whmage, gob);
         }
     }
