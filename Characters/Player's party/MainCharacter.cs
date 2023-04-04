@@ -21,6 +21,15 @@ namespace Roguelike_2
             this.gold = gold;
             this.specaction = specaction;
             this.realhp = hp;
+            if (hp > 0)
+            {
+                base.battlesym = sym;
+            }
+            else
+            {
+                base.battlesym = '+';
+                base.hp = 0;
+            }
         }
 
     }

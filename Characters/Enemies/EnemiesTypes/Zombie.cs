@@ -6,8 +6,11 @@ using System.Threading.Tasks;
 
 namespace Roguelike_2
 {
-    class Zombie// : Enemy
+    class Zombie : Enemy
     {
+        public Zombie(int damage, float defence, int hp, int sp, float x, float y, int ix, int iy, char sym, int retgol) : base(damage, defence, hp, sp, x, y, ix, iy, sym, retgol)
+        {
 
+        }
     }
 }

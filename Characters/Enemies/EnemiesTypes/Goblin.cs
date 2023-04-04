@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Roguelike_2
@@ -13,7 +14,5 @@ namespace Roguelike_2
             List<LittlePoition> poitions = new List<LittlePoition>();
             //poitions.Add();
         }
-
-
     }
 }
