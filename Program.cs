@@ -1,74 +1,38 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Drawing;
 
-namespace Roguelike_2
+namespace ConsoleApp1
 {
-    class Program
+    public class Dungeon
     {
-        static void Main()
+        private static Int32 DungeonWidth = 48;
+        private static Int32 DungeonHeight = 24;
+        private static Int32 DungeonRooms = 6;
+
+        public static Int32 Main(String[] args)
         {
-            BlackMage blmage = new BlackMage("Антон", 10, 0.1f, 10, 100, 80f, 14f, 1, 3, 1, 50, "Заклинание", 'M');
-            WhiteMage whmage = new WhiteMage("Толик", 10, 0.1f, 10, 100, 80f, 18f, 1, 3, 1, 50, "Заклинание", 'W');
-            Knight knight = new Knight("Борис", 20, 0.3f, 10, 0, 79f, 6f, 3, 3, 1, 50, "Концентрация", 'K');
-            Thieve thieve = new Thieve("Игорь", 15, 0.2f, 10, 0, 80f, 10f, 2, 3, 1, 50, "Украсть", 'T');
+            Grid map = new Grid(DungeonWidth, DungeonHeight, DungeonRooms);
 
-            Goblin[] gob = new Goblin[4];
+            if (map.GenerateRooms().Equals(false))
+            {
+                Console.WriteLine("Error: failed to generate dungeon map rooms.");
+                return 1;
+            }
 
+            else if (map.GenerateTunnels().Equals(false))
+            {
+                Console.WriteLine("Error: failed to generate dungeon map tunnels.");
+                return 1;
+            }
 
-            gob[0] = new Goblin(10, 0.2f, 100, 0, 10f, 6f, 2, 3, 'G', 10);
-            gob[1] = new Goblin(10, 0.2f, 100, 0, 10f, 10f, 2, 3, 'G', 10);
-            gob[2] = new Goblin(10, 0.2f, 100, 0, 10f, 14f, 2, 3, 'G', 10);
-            gob[3] = new Goblin(10, 0.2f, 100, 0, 10f, 18f, 2, 3, 'G', 10);
+            else if (map.Print().Equals(false))
+            {
+                Console.WriteLine("Error: failed to print a dungeon map.");
+                return 2;
+            }
 
-            List<Item> items = new List<Item>();
-
-            Battlefield.Pole(knight, thieve, blmage, whmage, gob);
-
-
-
-
+            Console.WriteLine("Successfully generated a dungeon map.");
+            return 0;
         }
-
-
-
-        //static void Movement(CellInfo[,] myArray)
-        //{
-        //    short x = 1;
-        //    short y = 1;
-        //    ConsoleKeyInfo consoleKey = Console.ReadKey();
-        //    short temp_x = x;
-        //    short temp_y = y;
-        //    switch (consoleKey.Key)
-        //    {
-        //        case ConsoleKey.W:
-        //            --temp_y;
-        //            break;
-
-        //        case ConsoleKey.A:
-        //            --temp_x;
-        //            break;
-
-        //        case ConsoleKey.S:
-        //            --temp_y;
-        //            break;
-
-        //        case ConsoleKey.D:
-        //            --temp_x;
-        //            break;
-        //    }
-        //    if (myArray[temp_y, temp_x].cellID != CellID.Wall)
-        //    {
-        //        myArray[y, x].cellID = CellID.None;
-        //        y = temp_y;
-        //        x = temp_x;
-        //        myArray[y, x].cellID = CellID.Player;
-        //    }
-        //}
-
     }
 }
-    
-
