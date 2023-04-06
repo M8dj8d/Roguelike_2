@@ -35,7 +35,7 @@ namespace Roguelike_2
 
         public void Steal(List<Enemy> enemy)
         {
-            enemy.L
+            //enemy.little
         }
     }
 }
