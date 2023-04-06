@@ -9,10 +9,19 @@ namespace Roguelike_2
 {
     class Goblin : Enemy
     {
-        public Goblin(int damage, float defence, int hp, int sp, float x, float y, int ix, int iy, char sym, int retgol) : base(damage, defence, hp, sp, x, y, ix, iy, sym, retgol) 
+        public LittlePoition[] littlePoitions = new LittlePoition[2];
+        public Goblin(float x, float y)
         {
-            List<LittlePoition> poitions = new List<LittlePoition>();
-            //poitions.Add();
+            damage = 25;
+            defence = 0.2f;
+            hp = 100;
+            sp = 0;
+            base.x = x;
+            base.y = y;
+            ix = 3;
+            iy = 3;
+            battlesym = 'G';
+            retgol = 50;
         }
     }
 }

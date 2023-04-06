@@ -8,9 +8,21 @@ namespace Roguelike_2
 {
     class Slime : Enemy
     {
-        public Slime(int damage, float defence, int hp, int sp, float x, float y, int ix, int iy, char sym, int retgol) : base(damage, defence, hp, sp, x, y, ix, iy, sym, retgol)
-        {
 
+        public LittlePoition[] littlePoitions = new LittlePoition[2];
+
+        public Slime(float x, float y)
+        {
+            damage = 30;
+            defence = 0.4f;
+            hp = 115;
+            sp = 0;
+            base.x = x;
+            base.y = y;
+            ix = 3;
+            iy = 2;
+            battlesym = 'S';
+            retgol = 100;
         }
     }
 }

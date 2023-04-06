@@ -9,7 +9,7 @@ namespace Roguelike_2
 {
     class Battlefield  //класс, отвечающий за отображение поля боя
     {
-        public static void Pole(Knight knight, Thieve thieve, BlackMage blmage, WhiteMage whmage, Enemy[] enemy)
+        public static void Pole(Knight knight, Thieve thieve, BlackMage blmage, WhiteMage whmage, List<Enemy> enemy)
         {
             byte turn = 0;                              //переменная которая фиксирует чей сейчас ход
             byte coordinates = 0;                           //хранит координаты курсора при выборе действия
@@ -30,15 +30,15 @@ namespace Roguelike_2
                     continue;
                 if (turn == 4 && whmage.hp <= 0)
                     continue;
-                //if (knight.hp > 0)
-                //    knight.battlesym = 'K';
-                //if (thieve.hp > 0)
-                //    thieve.battlesym = 'T';
-                //if (blmage.hp > 0)
-                //    blmage.battlesym = 'M';
-                //if (whmage.hp > 0)
-                //    whmage.battlesym = 'W';
-                
+                if (knight.hp > 0)
+                    knight.battlesym = 'K';
+                if (thieve.hp > 0)
+                    thieve.battlesym = 'T';
+                if (blmage.hp > 0)
+                    blmage.battlesym = 'M';
+                if (whmage.hp > 0)
+                    whmage.battlesym = 'W';
+
 
                 switch (turn)                            //позволяет выдвинуть вперед персонажа, который совершает ход
                 {
@@ -267,25 +267,13 @@ namespace Roguelike_2
                         {
                             hit_chance = (byte)rnd.Next(0, 20);
                             if (hit_chance >= 0 && hit_chance <= 4 && knight.hp > 0)
-                            {
-                                Enemy_Attak_Animation(enemy[0]);
                                 enemy[0].Attak(enemy[0], knight);
-                            }
                             if (hit_chance >= 6 && hit_chance <= 10 && thieve.hp > 0)
-                            {
-                                Enemy_Attak_Animation(enemy[0]);
                                 enemy[0].Attak(enemy[0], thieve);
-                            }
                             if (hit_chance >= 12 && hit_chance <= 15 && blmage.hp > 0)
-                            {
-                                Enemy_Attak_Animation(enemy[0]);
                                 enemy[0].Attak(enemy[0], blmage);
-                            }
                             if (hit_chance >= 17 && hit_chance <= 20 && whmage.hp > 0)
-                            {
-                                Enemy_Attak_Animation(enemy[0]);
                                 enemy[0].Attak(enemy[0], whmage);
-                            }
                         }
                         break;
                     case (6):
@@ -293,25 +281,13 @@ namespace Roguelike_2
                         {
                             hit_chance = (byte)rnd.Next(0, 20);
                             if (hit_chance >= 0 && hit_chance <= 4 && knight.hp > 0)
-                            {
-                                Enemy_Attak_Animation(enemy[1]);
-                                enemy[1].Attak(enemy[1], knight);
-                            }
+                                enemy[1].Attak(enemy[1], knight);   
                             if (hit_chance >= 6 && hit_chance <= 10 && thieve.hp > 0)
-                            {
-                                Enemy_Attak_Animation(enemy[1]);
                                 enemy[1].Attak(enemy[1], thieve);
-                            }
                             if (hit_chance >= 12 && hit_chance <= 15 && blmage.hp > 0)
-                            {
-                                Enemy_Attak_Animation(enemy[1]);
                                 enemy[1].Attak(enemy[1], blmage);
-                            }
                             if (hit_chance >= 17 && hit_chance <= 20 && whmage.hp > 0)
-                            {
-                                Enemy_Attak_Animation(enemy[1]);
                                 enemy[1].Attak(enemy[1], whmage);
-                            }
                         }
                         break;
                     case (7):
@@ -319,25 +295,13 @@ namespace Roguelike_2
                         {
                             hit_chance = (byte)rnd.Next(0, 20);
                             if (hit_chance >= 0 && hit_chance <= 4 && knight.hp > 0)
-                            {
-                                Enemy_Attak_Animation(enemy[2]);
                                 enemy[2].Attak(enemy[2], knight);
-                            }
                             if (hit_chance >= 6 && hit_chance <= 10 && thieve.hp > 0)
-                            {
-                                Enemy_Attak_Animation(enemy[2]);
                                 enemy[2].Attak(enemy[2], thieve);
-                            }
                             if (hit_chance >= 12 && hit_chance <= 15 && blmage.hp > 0)
-                            {
-                                Enemy_Attak_Animation(enemy[2]);
                                 enemy[2].Attak(enemy[2], blmage);
-                            }
                             if (hit_chance >= 17 && hit_chance <= 20 && whmage.hp > 0)
-                            {
-                                Enemy_Attak_Animation(enemy[2]);
                                 enemy[2].Attak(enemy[2], whmage);
-                            }
                         }
                         break;
                     case (8):
@@ -345,25 +309,13 @@ namespace Roguelike_2
                         {
                             hit_chance = (byte)rnd.Next(0, 20);
                             if (hit_chance >= 0 && hit_chance <= 4 && knight.hp > 0)
-                            {
-                                Enemy_Attak_Animation(enemy[3]);
                                 enemy[3].Attak(enemy[3], knight);
-                            }
                             if (hit_chance >= 6 && hit_chance <= 10 && thieve.hp > 0)
-                            {
-                                Enemy_Attak_Animation(enemy[3]);
                                 enemy[3].Attak(enemy[3], thieve);
-                            }
                             if (hit_chance >= 12 && hit_chance <= 15 && blmage.hp > 0)
-                            {
-                                Enemy_Attak_Animation(enemy[3]);
                                 enemy[3].Attak(enemy[3], blmage);
-                            }
                             if (hit_chance >= 17 && hit_chance <= 20 && whmage.hp > 0)
-                            {
-                                Enemy_Attak_Animation(enemy[3]);
                                 enemy[3].Attak(enemy[3], whmage);
-                            }
                         }
                         break;
                 }
@@ -380,26 +332,26 @@ namespace Roguelike_2
                         turn = 0;
                     }
                 }
-                //if (knight.hp <= 0)
-                //{
-                //    knight.battlesym = '+';
-                //    knight.hp = 0;
-                //}
-                //if (thieve.hp <= 0)
-                //{
-                //    thieve.battlesym = '+';
-                //    thieve.hp = 0;
-                //}
-                //if (blmage.hp <= 0)
-                //{
-                //    blmage.battlesym = '+';
-                //    blmage.hp = 0;
-                //}
-                //if (whmage.hp <= 0)
-                //{
-                //    whmage.battlesym = '+';
-                //    whmage.hp = 0;
-                //}
+                if (knight.hp <= 0)
+                {
+                    knight.battlesym = '+';
+                    knight.hp = 0;
+                }
+                if (thieve.hp <= 0)
+                {
+                    thieve.battlesym = '+';
+                    thieve.hp = 0;
+                }
+                if (blmage.hp <= 0)
+                {
+                    blmage.battlesym = '+';
+                    blmage.hp = 0;
+                }
+                if (whmage.hp <= 0)
+                {
+                    whmage.battlesym = '+';
+                    whmage.hp = 0;
+                }
                 if (knight.hp <= 0 && thieve.hp <= 0 && blmage.hp <= 0 && whmage.hp <= 0)
                     turn = 9;
                 
@@ -456,7 +408,7 @@ namespace Roguelike_2
 
 
 
-        private static void Attak(MainCharacter hero, ref Enemy[] enemy, byte hit)       //воспроизводит анимацию атаки и саму атаку
+        private static void Attak(MainCharacter hero, ref List<Enemy> enemy, byte hit)       //воспроизводит анимацию атаки и саму атаку
         {
             byte which_enemy;
             Console.SetCursorPosition(100, 24);
@@ -518,7 +470,7 @@ namespace Roguelike_2
 
 
 
-        private static void BlackMagic(BlackMage hero, ref Enemy[] enemy, byte hit)       //отвечает за воспроизводство черной магии
+        private static void BlackMagic(BlackMage hero, ref List<Enemy> enemy, byte hit)       //отвечает за воспроизводство черной магии
         {
             byte cursor;
             byte which_enemy;
@@ -1057,17 +1009,6 @@ namespace Roguelike_2
     
     
     
-        private static void Enemy_Attak_Animation(Enemy enemy)
-        {
-            Console.SetCursorPosition(Convert.ToInt32(enemy.x) + 7, Convert.ToInt32(enemy.y + 1));
-            Thread.Sleep(250);
-            Console.Write("-");
-            Console.SetCursorPosition(Convert.ToInt32(enemy.x) + 8, Convert.ToInt32(enemy.y + 1));
-            Thread.Sleep(250);
-            Console.Write("-");
-            Console.SetCursorPosition(Convert.ToInt32(enemy.x) + 9, Convert.ToInt32(enemy.y + 1));
-            Thread.Sleep(250);
-            Console.Write("-");
-        }
+        
     }
 }

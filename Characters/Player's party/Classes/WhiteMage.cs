@@ -8,7 +8,30 @@ namespace Roguelike_2
 {
     class WhiteMage : MainCharacter, IWhiteMagic
     {
-        public WhiteMage(string name, int damage, float defence, int hp, int sp, float x, float y, int ix, int iy, int lvl, int gold, string specaction, char sym) : base(name, damage, defence, hp, sp, x, y, ix, iy, lvl, gold, specaction, sym) { }
+        public WhiteMage()
+        {
+            name = "Ann";
+            damage = 10;
+            defence = 0.1f;
+            hp = 100;
+            sp = 100;
+            x = 80f;
+            y = 18f;
+            lvl = 1;
+            gold = 50;
+            ix = 1;
+            iy = 3;
+            specaction = "Заклинание";
+            if (hp > 0)
+            {
+                battlesym = 'W';
+            }
+            else
+            {
+                battlesym = '+';
+                hp = 0;
+            }
+        }
 
         public void Dia(WhiteMage wmage, MainCharacter ally)
         {
@@ -27,7 +50,7 @@ namespace Roguelike_2
             }
             else
             {
-                Console.SetCursorPosition(20, 33);
+                Console.SetCursorPosition(10, 35);
                 Console.WriteLine("У вас не получается восстановить здоровье");
             }
         }

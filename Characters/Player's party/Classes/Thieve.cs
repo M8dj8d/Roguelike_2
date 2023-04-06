@@ -8,11 +8,34 @@ namespace Roguelike_2
 {
     class Thieve : MainCharacter
     {
-        public Thieve (string name, int damage, float defence, int hp, int sp, float x, float y, int ix, int iy, int lvl, int gold, string specaction, char sym) : base(name, damage, defence, hp, sp, x, y, ix, iy, lvl, gold, specaction, sym) { }
-
-        public void Steal(Enemy[] enemy)
+        public Thieve () 
         {
+            name = "Thieve";
+            damage = 10;
+            defence = 0.1f;
+            hp = 115;
+            sp = 0;
+            x = 80f;
+            y = 10f;
+            lvl = 1;
+            gold = 50;
+            ix = 2;
+            iy = 3;
+            specaction = "Украсть";
+            if (hp > 0)
+            {
+                battlesym = 'T';
+            }
+            else
+            {
+                battlesym = '+';
+                hp = 0;
+            }
+        }
 
+        public void Steal(List<Enemy> enemy)
+        {
+            enemy.L
         }
     }
 }

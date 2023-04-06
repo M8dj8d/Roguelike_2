@@ -9,7 +9,30 @@ namespace Roguelike_2
 {
     class BlackMage : MainCharacter, IBlackMagic
     {
-        public BlackMage(string name, int damage, float defence, int hp, int sp, float x, float y, int ix, int iy, int lvl, int gold, string specaction, char sym) : base (name, damage, defence, hp, sp, x, y, ix, iy, lvl, gold, specaction, sym) { }
+        public BlackMage() 
+        {
+            name = "Ren";
+            damage = 10;
+            defence = 0.1f;
+            hp = 100;
+            sp = 100;
+            x = 80f;
+            y = 14f;
+            lvl = 1;
+            gold = 50;
+            ix = 1;
+            iy = 3;
+            specaction = "Заклинание";
+            if (hp > 0)
+            {
+                battlesym = 'M';
+            }
+            else
+            {
+                battlesym = '+';
+                hp = 0;
+            }
+        }
 
 
         public void Agi(Enemy enemy, BlackMage mage, byte hit)
