@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Roguelike_2
+namespace ConsoleApp1
 {
-    class Program
+    public class Dungeon
     {
         private static Int32 DungeonWidth = 165;
         private static Int32 DungeonHeight = 38;
@@ -126,5 +126,3 @@ namespace Roguelike_2
 
     }
 }
-    
-
