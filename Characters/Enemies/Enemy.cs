@@ -13,7 +13,9 @@ namespace Roguelike_2
     {
         public int retgol;              //золото, которое в конце боя получит игрок
         public char sym;
-        
+
+        public List<Item> poitions = new List<Item>();
+
 
         public void Attak(Enemy goblin, MainCharacter hero)
         {

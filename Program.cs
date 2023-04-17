@@ -1,35 +1,72 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Dynamic;
+using System.Diagnostics;
+using System.IO.MemoryMappedFiles;
+using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Media.Media3D;
 
 namespace Roguelike_2
 {
     public class Dungeon
     {
-        private static Int32 DungeonWidth = 165;
-        private static Int32 DungeonHeight = 38;
-        private static Int32 DungeonRooms = 15;
-
-        static void Main()
+        
+        static void Main(string[] args)
         {
+            for(int i = 0; i < 5; i++)
+            {
+                LittlePoition littlePoition = new LittlePoition();  
+                MainCharacter.inventory.items.Add(littlePoition);
+            }
+            
+            for(int i = 0; i < 3; i++)
+            {
+                MiddlePoition middlePoition = new MiddlePoition();
+                MainCharacter.inventory.items.Add(middlePoition);
+            }
+
+            BigPoition bigPoition = new BigPoition();
+            MainCharacter.inventory.items.Add(bigPoition);
+
+            Coffee coffee = new Coffee();
+            MainCharacter.inventory.items.Add(coffee);
+
+            for (int i = 0; i < 3; i++)
+            {
+                PhoenixDown phoenixDown = new PhoenixDown();
+                MainCharacter.inventory.items.Add(phoenixDown);
+            }
+
+            //foreach (Item item in MainCharacter.inventory.items)
+            //{
+            //    Console.WriteLine(item);
+            //}
+
+            if (args.Length == 1)
+            {
+                startFight(args[0]);
+            }
+            else
+            {
+                openFightWindow();
+            }
+        } 
+        
+        public static void startFight(string filename)
+        {
+            Console.WindowWidth = 170;
+            Console.WindowHeight = 40;
+            Console.Title = "Battle mode";
+
+            List<Enemy> enemies = new List<Enemy>();
+
             BlackMage blmage = new BlackMage();
             WhiteMage whmage = new WhiteMage();
             Knight knight = new Knight();
             Thieve thieve = new Thieve();
-
-
-            //Goblin[] gob = new Goblin[4];
-
-
-            //gob[0] = new Goblin(10, 0.2f, 100, 0, 10f, 6f, 2, 3, 'G', 10);
-            //gob[1] = new Goblin(10, 0.2f, 100, 0, 10f, 10f, 2, 3, 'G', 10);
-            //gob[2] = new Goblin(10, 0.2f, 100, 0, 10f, 14f, 2, 3, 'G', 10);
-            //gob[3] = new Goblin(10, 0.2f, 100, 0, 10f, 18f, 2, 3, 'G', 10);
-
-            List<Enemy> enemies = new List<Enemy>();
 
             Random rnd = new Random();
 
@@ -56,73 +93,38 @@ namespace Roguelike_2
                 }
             }
 
-            List<Item> items = new List<Item>();
-
-
-
             Battlefield.Pole(knight, thieve, blmage, whmage, enemies);
 
-
-            //Grid map = new Grid(DungeonWidth, DungeonHeight, DungeonRooms);
-
-            //if (map.GenerateRooms().Equals(false))
-            //{
-            //    Console.WriteLine("Error: failed to generate dungeon map rooms.");
-            //    return 1;
-            //}
-
-            //else if (map.GenerateTunnels().Equals(false))
-            //{
-            //    Console.WriteLine("Error: failed to generate dungeon map tunnels.");
-            //    return 1;
-            //}
-
-            //else if (map.Print().Equals(false))
-            //{
-            //    Console.WriteLine("Error: failed to print a dungeon map.");
-            //    return 2;
-            //}
-
-            //Console.WriteLine("Successfully generated a dungeon map.");
-            //return 0;
-
+            using (var mmf = MemoryMappedFile.OpenExisting(filename))
+            using (var stream = mmf.CreateViewStream())
+            {
+                var bw = new BinaryWriter(stream);
+                //bw.Write(key.KeyChar);
+            }
         }
 
+        public static void openFightWindow()
+        {
+            Console.Title = "Dungeon";
 
+            var randomFileName = Guid.NewGuid().ToString();
 
-        //static void Movement(CallInfo[,] myArray)
-        //{
-        //    short x = 1;
-        //    short y = 1;
-        //    ConsoleKeyInfo consoleKey = Console.ReadKey();
-        //    short temp_x = x;
-        //    short temp_y = y;
-        //    switch (consoleKey.Key)
-        //    {
-        //        case ConsoleKey.W:
-        //            --temp_y;
-        //            break;
+            using (var mmf = MemoryMappedFile.CreateNew(randomFileName, 1))
+            {
+                var proc = Process.Start(Assembly.GetExecutingAssembly().Location, randomFileName);
 
-        //        case ConsoleKey.A:
-        //            --temp_x;
-        //            break;
+                //    Console.WriteLine("Wait for second window complete ...");
 
-        //        case ConsoleKey.S:
-        //            --temp_y;
-        //            break;
+                proc.WaitForExit();
 
-        //        case ConsoleKey.D:
-        //            --temp_x;
-        //            break;
-        //    }
-        //    if (myArray[temp_y, temp_x].cellID != CellID.Wall)
-        //    {
-        //        myArray[y, x].cellID = CellID.None;
-        //        y = temp_y;
-        //        x = temp_x;
-        //        myArray[y, x].cellID = CellID.Player;
-        //    }
-        //}
+                using (var stream = mmf.CreateViewStream())
+                {
+                    var reader = new BinaryReader(stream);
+                    var key = reader.ReadChar();
 
+                    Console.WriteLine("Second window key is: " + key);
+                }
+            }
+        }
     }
 }

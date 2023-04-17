@@ -69,7 +69,11 @@
     <Compile Include="Interfaces\IWhiteMagic.cs" />
     <Compile Include="Inventory\Inventory.cs" />
     <Compile Include="Inventory\Item.cs" />
+    <Compile Include="Inventory\Items\BigPoition.cs" />
+    <Compile Include="Inventory\Items\Coffee.cs" />
     <Compile Include="Inventory\Items\LittlePoition.cs" />
+    <Compile Include="Inventory\Items\MiddlePoition.cs" />
+    <Compile Include="Inventory\Items\PhoenixDown.cs" />
     <Compile Include="Map and Rooms\Door.cs" />
     <Compile Include="Map and Rooms\Dungeon.cs" />
     <Compile Include="Map and Rooms\Grid.cs" />

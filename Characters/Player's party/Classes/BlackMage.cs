@@ -19,19 +19,11 @@ namespace Roguelike_2
             x = 80f;
             y = 14f;
             lvl = 1;
+            realhp = hp;
             gold = 50;
             ix = 1;
             iy = 3;
-            specaction = "Заклинание";
-            if (hp > 0)
-            {
-                battlesym = 'M';
-            }
-            else
-            {
-                battlesym = '+';
-                hp = 0;
-            }
+            specaction = "Заклинание";            
         }
 
 

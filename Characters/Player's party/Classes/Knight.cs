@@ -20,6 +20,7 @@ namespace Roguelike_2
             lvl = 1;
             gold = 50;
             ix = 3;
+            realhp = hp;
             iy = 3;
             specaction = "Концентрация";
             if (hp > 0)

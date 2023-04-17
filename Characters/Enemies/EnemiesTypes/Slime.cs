@@ -9,7 +9,7 @@ namespace Roguelike_2
     class Slime : Enemy
     {
 
-        public LittlePoition[] littlePoitions = new LittlePoition[2];
+        //public LittlePoition[] littlePoitions = new LittlePoition[2];
 
         public Slime(float x, float y)
         {
@@ -23,6 +23,10 @@ namespace Roguelike_2
             iy = 2;
             battlesym = 'S';
             retgol = 100;
+            MiddlePoition middlePoition = new MiddlePoition();
+            Coffee coffee = new Coffee();
+            this.poitions.Add(middlePoition);
+            this.poitions.Add(coffee);
         }
     }
 }

@@ -14,6 +14,7 @@ namespace Roguelike_2
             damage = 10;
             defence = 0.1f;
             hp = 100;
+            realhp = hp;
             sp = 100;
             x = 80f;
             y = 18f;
@@ -37,7 +38,7 @@ namespace Roguelike_2
         {
             if (wmage.sp >= 8 && ally.hp != 0)
             {
-                if (ally.realhp - ally.hp > 50)
+                if (ally.realhp - ally.hp >= 50)
                 {
                     ally.hp += 50;
                     wmage.sp -= 8;  

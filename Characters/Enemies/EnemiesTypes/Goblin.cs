@@ -9,7 +9,6 @@ namespace Roguelike_2
 {
     class Goblin : Enemy
     {
-        public LittlePoition[] littlePoitions = new LittlePoition[2];
         public Goblin(float x, float y)
         {
             damage = 25;
@@ -22,6 +21,10 @@ namespace Roguelike_2
             iy = 3;
             battlesym = 'G';
             retgol = 50;
+            LittlePoition littlePoition = new LittlePoition();
+            Coffee coffee = new Coffee();
+            this.poitions.Add(littlePoition);
+            this.poitions.Add(coffee);
         }
     }
 }

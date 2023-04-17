@@ -10,9 +10,6 @@ namespace Roguelike_2
 {
     class Zombie : Enemy
     {
-
-        public LittlePoition[] littlePoitions = new LittlePoition[2];
-
         public Zombie(float x, float y)
         {
             damage = 40;
@@ -25,9 +22,10 @@ namespace Roguelike_2
             iy = 3;
             battlesym = 'Z';
             retgol = 150;
-
+            BigPoition bigPoition = new BigPoition();
+            PhoenixDown phoenixDown = new PhoenixDown();
+            this.poitions.Add(bigPoition);
+            this.poitions.Add(phoenixDown);
         }
-
-        
     }
 }

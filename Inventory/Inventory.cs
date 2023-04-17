@@ -8,6 +8,6 @@ namespace Roguelike_2
 {
     class Inventory
     {
-
+        public List<Item> items = new List<Item>();
     }
 }
