@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace Roguelike_2
 {
-    class Item
+    public class Item
     {
-
+        public string name;
     }
 }

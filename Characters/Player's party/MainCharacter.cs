@@ -7,12 +7,13 @@ using System.Threading.Tasks;
 
 namespace Roguelike_2
 {
-    class MainCharacter : Character
+    public class MainCharacter : Character
     {
         public int lvl;
         public int gold;
         public string specaction;
         public int realhp;
+        public int realsp;
         public string name;
 
         public static Inventory inventory = new Inventory();

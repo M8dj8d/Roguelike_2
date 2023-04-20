@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace Roguelike_2
 {
-    class Knight : MainCharacter
+    public class Knight : MainCharacter
     {
         public Knight () 
         {
             name = "Knight";
-            damage = 20;
+            damage = 45;
             defence = 0.3f;
             hp = 150;
             sp = 0;
@@ -19,6 +19,7 @@ namespace Roguelike_2
             y = 6f;
             lvl = 1;
             gold = 50;
+            realsp = sp;
             ix = 3;
             realhp = hp;
             iy = 3;

@@ -7,8 +7,12 @@ using System.Threading.Tasks;
 
 namespace Roguelike_2
 {
-    class PhoenixDown : Item
+    public class PhoenixDown : Item
     {
+        public PhoenixDown() 
+        {
+            name = "phoenixDown";
+        }
         public static void Resurrection(List <Item> poitions, MainCharacter hero)
         {
             if (poitions.Count >= 1)

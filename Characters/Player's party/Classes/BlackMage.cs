@@ -7,12 +7,12 @@ using System.Threading.Tasks;
 
 namespace Roguelike_2
 {
-    class BlackMage : MainCharacter, IBlackMagic
+    public class BlackMage : MainCharacter, IBlackMagic
     {
         public BlackMage() 
         {
             name = "Ren";
-            damage = 10;
+            damage = 25;
             defence = 0.1f;
             hp = 100;
             sp = 100;
@@ -20,6 +20,7 @@ namespace Roguelike_2
             y = 14f;
             lvl = 1;
             realhp = hp;
+            realsp = sp;
             gold = 50;
             ix = 1;
             iy = 3;

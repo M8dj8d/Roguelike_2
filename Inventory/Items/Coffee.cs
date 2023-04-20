@@ -6,21 +6,25 @@ using System.Threading.Tasks;
 
 namespace Roguelike_2
 {
-    class Coffee : Item
+    public class Coffee : Item
     {
+        public Coffee()
+        {
+            name = "coffe";
+        }
         public static void Restores_SP(List <Item> poitions, MainCharacter hero)
         {
             if (poitions.Count >= 1)
             {
-                if (hero.realhp - hero.hp >= 30)
+                if (hero.realsp - hero.sp >= 30)
                 {
                     Coffee coffee = new Coffee();
                     poitions.Remove(coffee);
-                    hero.hp += 30;
+                    hero.sp += 30;
                 }
                 else
                 {
-                    hero.hp = hero.realhp;
+                    hero.sp = hero.realsp;
                 }
             }
         }

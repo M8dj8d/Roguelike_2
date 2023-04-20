@@ -7,16 +7,17 @@ using System.Threading.Tasks;
 
 namespace Roguelike_2
 {
-    class Thieve : MainCharacter
+    public class Thieve : MainCharacter
     {
         public Thieve () : base()
         {
             name = "Thieve";
-            damage = 10;
+            damage = 35;
             defence = 0.1f;
             hp = 115;
             sp = 0;
             realhp = hp;
+            realsp = sp;
             x = 80f;
             y = 10f;
             lvl = 1;

@@ -972,7 +972,7 @@ namespace Roguelike_2
             Console.SetCursorPosition(90, 6);
             Console.WriteLine("name: {0}\tHP: {1}\tSP: {2}\tDamage: {3}\tDefence: {4}\tGold: {5}", blmage.name, blmage.hp, blmage.sp, blmage.damage, blmage.defence, blmage.gold);
             Console.SetCursorPosition(90, 7);
-            Console.WriteLine("name: {0}\tHP: {1}\tSP: {2}\tDamage: {3}\tDefence: {4}\tGold: {5}", whmage.name, whmage.hp, whmage.sp, whmage.damage, whmage.defence, whmage.gold);
+            Console.WriteLine("name: {0}\tHP: {1}\tSP: {2}\tDamage: {3}\tDefence: {4}\tGold: {5}", whmage.name, whmage.hp, whmage.sp, whmage.damage, whmage.defence, whmage.gold);            
         }    
     }
 }

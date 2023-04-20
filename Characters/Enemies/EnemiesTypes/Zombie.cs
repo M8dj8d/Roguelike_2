@@ -8,7 +8,7 @@ using System.Windows.Media;
 
 namespace Roguelike_2
 {
-    class Zombie : Enemy
+    public class Zombie : Enemy
     {
         public Zombie(float x, float y)
         {

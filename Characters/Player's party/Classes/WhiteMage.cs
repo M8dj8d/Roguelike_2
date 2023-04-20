@@ -6,16 +6,17 @@ using System.Threading.Tasks;
 
 namespace Roguelike_2
 {
-    class WhiteMage : MainCharacter, IWhiteMagic
+    public class WhiteMage : MainCharacter, IWhiteMagic
     {
         public WhiteMage()
         {
             name = "Ann";
-            damage = 10;
+            damage = 25;
             defence = 0.1f;
             hp = 100;
             realhp = hp;
             sp = 100;
+            realsp = sp;
             x = 80f;
             y = 18f;
             lvl = 1;

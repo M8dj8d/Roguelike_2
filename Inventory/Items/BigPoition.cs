@@ -6,15 +6,19 @@ using System.Threading.Tasks;
 
 namespace Roguelike_2
 {
-    class BigPoition : Item
+    public class BigPoition : Item
     {
+        public BigPoition()
+        {
+            name = "bigPoition";
+        }
         public static void Heal(List<Item> poitions, MainCharacter hero)
         {
             if (poitions.Count >= 1)
             {
                 if (hero.realhp - hero.hp >= 100)
                 {
-                    LittlePoition bigPoition = new LittlePoition();
+                    BigPoition bigPoition = new BigPoition();
                     poitions.Remove(bigPoition);
                     hero.hp += 100;
                 }

@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace Roguelike_2
 {
 
-    class Enemy : Character
+    public class Enemy : Character
     {
         public int retgol;              //золото, которое в конце боя получит игрок
         public char sym;

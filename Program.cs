@@ -11,12 +11,17 @@ using System.Windows.Media.Media3D;
 
 namespace Roguelike_2
 {
-    public class Dungeon
+    public class Program
     {
         
         static void Main(string[] args)
         {
-            for(int i = 0; i < 5; i++)
+            BlackMage blmage = new BlackMage();
+            WhiteMage whmage = new WhiteMage();
+            Knight knight = new Knight();
+            Thieve thieve = new Thieve();
+
+            for (int i = 0; i < 5; i++)
             {
                 LittlePoition littlePoition = new LittlePoition();  
                 MainCharacter.inventory.items.Add(littlePoition);
@@ -40,22 +45,21 @@ namespace Roguelike_2
                 MainCharacter.inventory.items.Add(phoenixDown);
             }
 
-            //foreach (Item item in MainCharacter.inventory.items)
-            //{
-            //    Console.WriteLine(item);
-            //}
-
             if (args.Length == 1)
             {
-                startFight(args[0]);
+                StartFight(args[0], blmage, whmage, knight, thieve);
             }
             else
             {
-                openFightWindow();
+                OpenFightWindow();
             }
-        } 
-        
-        public static void startFight(string filename)
+
+
+
+            //Battlefield.Pole(knight, thieve, blmage, whmage, enemies);
+        }
+
+        public static void StartFight(string filename, BlackMage blmage, WhiteMage whmage, Knight knight, Thieve thieve)
         {
             Console.WindowWidth = 170;
             Console.WindowHeight = 40;
@@ -63,10 +67,7 @@ namespace Roguelike_2
 
             List<Enemy> enemies = new List<Enemy>();
 
-            BlackMage blmage = new BlackMage();
-            WhiteMage whmage = new WhiteMage();
-            Knight knight = new Knight();
-            Thieve thieve = new Thieve();
+            
 
             Random rnd = new Random();
 
@@ -99,11 +100,10 @@ namespace Roguelike_2
             using (var stream = mmf.CreateViewStream())
             {
                 var bw = new BinaryWriter(stream);
-                //bw.Write(key.KeyChar);
             }
         }
 
-        public static void openFightWindow()
+        public static void OpenFightWindow()
         {
             Console.Title = "Dungeon";
 
@@ -112,9 +112,6 @@ namespace Roguelike_2
             using (var mmf = MemoryMappedFile.CreateNew(randomFileName, 1))
             {
                 var proc = Process.Start(Assembly.GetExecutingAssembly().Location, randomFileName);
-
-                //    Console.WriteLine("Wait for second window complete ...");
-
                 proc.WaitForExit();
 
                 using (var stream = mmf.CreateViewStream())
@@ -122,7 +119,6 @@ namespace Roguelike_2
                     var reader = new BinaryReader(stream);
                     var key = reader.ReadChar();
 
-                    Console.WriteLine("Second window key is: " + key);
                 }
             }
         }

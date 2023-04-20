@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Roguelike_2
 {
-    class Character
+    public class Character
     {
         public int damage;              //количество наносимого урона
         public float defence;           //коэффициент брони

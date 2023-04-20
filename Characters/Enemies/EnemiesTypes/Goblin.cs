@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Roguelike_2
 {
-    class Goblin : Enemy
+    public class Goblin : Enemy
     {
         public Goblin(float x, float y)
         {

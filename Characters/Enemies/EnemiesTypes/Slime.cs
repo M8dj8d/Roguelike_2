@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Roguelike_2
 {
-    class Slime : Enemy
+    public class Slime : Enemy
     {
 
         //public LittlePoition[] littlePoitions = new LittlePoition[2];
